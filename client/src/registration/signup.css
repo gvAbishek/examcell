@@ -1,0 +1,119 @@
+/* signup.css */
+
+/* * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    outline: none;
+    list-style: none;
+    text-decoration: none;
+    font-family: 'Roboto', sans-serif;
+}
+
+body {
+    background: url('back.png') no-repeat fixed center;
+    background-size: cover;
+    font-size: 16px; 
+    text-align: center;
+    padding: 50px; 
+    color: rgb(18, 18, 82);
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    opacity: 0; 
+    animation: fadeIn 3s forwards; 
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+} */
+
+#header {
+    margin: 0 auto;
+    max-width: 400px; 
+    padding: 30px; 
+    background: #fff;
+    border: 2px solid #e6e6e6; 
+    border-radius: 5px; 
+}
+
+#header .top {
+    padding: 30px; 
+}
+
+#header .logo img {
+    display: block;
+    margin: 0 auto 35px;
+    width: 290px; 
+}
+
+#header .top .text {
+    margin-bottom: 30px;
+}
+
+#header .form .input_field {
+    margin-bottom: 20px; 
+}
+
+#header .form .input_field .input {
+    width: 100%;
+    background: #fafafa;
+    border: 1px solid #efefef;
+    font-size: 14px; 
+    border-radius: 5px; 
+    color: #262626;
+    padding: 15px; 
+}
+
+.submit-btn {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    background-color: #3897f0;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.submit-btn:hover {
+    background-color: #4565a0;
+}
+
+#header .form .btn {
+    margin-top: 20px; 
+    background-color: #3897f0;
+    border: 1px solid #3897f0;
+    border-radius: 5px;
+    text-align: center;
+    padding: 10px 0; 
+}
+
+#header .form .btn a {
+    color: #fff;
+    display: block;
+}
+
+#header .or {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 15px;
+    margin: 15px 0 20px;
+}
+
+#header .or .line {
+    width: 105px; 
+    height: 2px;
+    background: #efefef;
+}
+
+#header .or p {
+    color: #999;
+    font-size: 14px; 
+    margin: 0 10px; 
+}

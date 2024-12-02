@@ -1,0 +1,107 @@
+import { Box, Button, IconButton, Typography, useTheme } from "@mui/material";
+import { tokens } from "../../theme";
+import DownloadOutlinedIcon from "@mui/icons-material/DownloadOutlined";
+import StickyNote2Icon from '@mui/icons-material/StickyNote2';
+import MenuBookIcon from '@mui/icons-material/MenuBook';
+import EditIcon from '@mui/icons-material/Edit';
+import DeleteIcon from '@mui/icons-material/Delete';
+import ArticleIcon from '@mui/icons-material/Article';
+import CurtainsIcon from '@mui/icons-material/Curtains';
+import Header from "../../components/Header";
+import StatBox from "../../components/StatBox";
+import { Link } from "react-router-dom";
+import React, { useState, useEffect } from "react";
+import axios from 'axios';
+
+function Dashboard() {
+  const theme = useTheme();
+  const colors = tokens(theme.palette.mode);
+  const [products, setProducts] = useState([]);
+
+  useEffect(() => {
+    axios.get('http://localhost:3002/Display')
+      .then(result => setProducts(result.data))
+      .catch(err => console.log(err));
+  }, []);
+
+  return (
+    <Box m="10px">
+      {/* HEADER */}
+      <Box display="flex" justifyContent="space-between" alignItems="center">
+        <Header title="DASHBOARD" subtitle="Welcome to your dashboard" />
+        <Box>
+          <Button
+            sx={{
+              backgroundColor: colors.blueAccent[700],
+              color: colors.grey[100],
+              fontSize: "14px",
+              fontWeight: "bold",
+              padding: "10px 20px",
+            }}
+          >
+            <DownloadOutlinedIcon sx={{ mr: "10px" }} />
+            Download Reports
+          </Button>
+        </Box>
+      </Box>
+
+      {/* GRID & CHARTS */}
+      <Box
+        display="grid"
+        gridTemplateColumns="repeat(12, 1fr)"
+        gridAutoRows="140px"
+        gap="20px"
+      >
+        {/* ROW 1 */}
+        <Box gridColumn="span 3" backgroundColor={colors.primary[400]} display="flex" alignItems="center" justifyContent="center">
+          <StatBox title="361" subtitle="Answer Booklet" progress="0.75" increase="+14%" icon={<MenuBookIcon sx={{ color: colors.greenAccent[600], fontSize: "26px" }} />} />
+        </Box>
+        {/* Similar StatBoxes for other statistics */}
+
+        {/* ROW 2 */}
+        <Box gridColumn="span 12" gridRow="span 12" backgroundColor={colors.primary[400]}>
+          <Box mt="25px" p="0 30px" display="flex" flexDirection="column">
+            <Typography variant="h5" fontWeight="600" color={colors.grey[100]} mb={2}>
+              Products Available in Database
+            </Typography>
+            <Box position="absolute" top={350} right={50} display="flex" alignItems="center">
+              <IconButton component={Link} to="/UpdateQuantity"><EditIcon /></IconButton>
+              <br></br>
+              <br></br>
+              <IconButton component={Link} to="/edit"><DeleteIcon /></IconButton>
+            </Box>
+            <br></br>
+            <Box display="flex" flexDirection="column" alignItems="auto" bgcolor="rgb(51, 255, 173)" color="black" boxShadow={3} borderRadius={4} p={2} mb={20} overflow="auto">
+              <table className='table'>
+                <thead>
+                  <tr>
+                    <th style={{ border: "1px solid black", textAlign: "center" }}>Product Name</th>
+                    <th style={{ border: "1px solid black", textAlign: "center" }}>Product Description</th>
+                    <th style={{ border: "1px solid black", textAlign: "center" }}>Purchase Quantity</th>
+                    <th style={{ border: "1px solid black", textAlign: "center" }}>Lot Number</th>
+                    <th style={{ border: "1px solid black", textAlign: "center" }}>Serial Number From</th>
+                    <th style={{ border: "1px solid black", textAlign: "center" }}>Serial Number To</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {products.map((product, index) => (
+                    <tr key={index}>
+                      <td style={{ border: "1px solid black", textAlign: "center" }}>{product.productName}</td>
+                      <td style={{ border: "1px solid black", textAlign: "center" }}>{product.productDescription}</td>
+                      <td style={{ border: "1px solid black", textAlign: "center" }}>{product.purchaseQuantity}</td>
+                      <td style={{ border: "1px solid black", textAlign: "center" }}>{product.lotNumber}</td>
+                      <td style={{ border: "1px solid black", textAlign: "center" }}>{product.serialNumberFrom}</td>
+                      <td style={{ border: "1px solid black", textAlign: "center" }}>{product.serialNumberTo}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </Box>
+          </Box>
+        </Box>
+      </Box>
+    </Box>
+  );
+}
+
+export default Dashboard;

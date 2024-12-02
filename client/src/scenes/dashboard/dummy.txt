@@ -1,0 +1,177 @@
+import React from "react";
+import { Box, Button, IconButton, Typography, useTheme } from "@mui/material";
+import { tokens } from "../../theme";
+import DownloadOutlinedIcon from "@mui/icons-material/DownloadOutlined";
+import AddIcon from '@mui/icons-material/Add';
+import StickyNote2Icon from '@mui/icons-material/StickyNote2';
+import MenuBookIcon from '@mui/icons-material/MenuBook';
+import ArticleIcon from '@mui/icons-material/Article';
+import CurtainsIcon from '@mui/icons-material/Curtains';
+import Header from "../../components/Header";
+import StatBox from "../../components/StatBox";
+import Slider from "react-slick";
+
+function Dashboard() {
+  const theme = useTheme();
+  const colors = tokens(theme.palette.mode);
+
+  
+
+ function Row1Slider() {
+    const settings = {
+      dots: true,
+      infinite: true,
+      slidesToShow: 3,
+      slidesToScroll: 1,
+      autoplay: true,
+      speed: 2000,
+      autoplaySpeed: 2000,
+      cssEase: "linear"
+    };
+
+    return (
+      <Slider {...settings}>
+        <div>
+          {/* Your first StatBox component */}
+          <StatBox
+            title="361"
+            subtitle="Answer Booklet"
+            progress="0.75"
+            increase="+14%"
+            icon={ 
+              <MenuBookIcon
+                sx={{ color: colors.greenAccent[600], fontSize: "26px" }}
+              />
+            }
+          />
+        </div>
+        <div>
+          {/* Your second StatBox component */}
+          <StatBox
+            title="225"
+            subtitle="A4 Sheet"
+            progress="0.50"
+            increase="+21%"
+            icon={
+              <StickyNote2Icon
+                sx={{ color: colors.greenAccent[600], fontSize: "26px" }}
+              />
+            }
+          />
+        </div>
+        <div>
+          {/* Your third StatBox component */}
+          <StatBox
+            title="441"
+            subtitle="A3 Sheet"
+            progress="0.30"
+            increase="+5%"
+            icon={
+              <ArticleIcon
+                sx={{ color: colors.greenAccent[600], fontSize: "26px" }}
+              />
+            }
+          />
+        </div>
+        <div>
+          {/* Your fourth StatBox component */}
+          <StatBox
+            title="134"
+            subtitle="Marksheet cover"
+            progress="0.80"
+            increase="+43%"
+            icon={
+              <CurtainsIcon
+                sx={{ color: colors.greenAccent[600], fontSize: "26px" }}
+              />
+            }
+          />
+        </div>
+      </Slider>
+    );
+  };
+
+  return (
+    <Box m="10px">
+      {/* HEADER */}
+      <Box display="flex" justifyContent="space-between" alignItems="center">
+        <Header title="DASHBOARD" subtitle="Welcome to your dashboard" />
+
+        <Box>
+          <Button
+            sx={{
+              backgroundColor: colors.blueAccent[700],
+              color: colors.grey[100],
+              fontSize: "14px",
+              fontWeight: "bold",
+              padding: "10px 20px",
+            }}
+          >
+            <DownloadOutlinedIcon sx={{ mr: "10px" }} />
+            Download Reports
+          </Button>
+        </Box>
+      </Box>
+
+      {/* GRID & CHARTS */}
+      <Box
+        display="grid"
+        gridTemplateColumns="repeat(12, 1fr)"
+        gridAutoRows="140px"
+        gap="20px"
+      >
+        {/* ROW 1 */}
+        <Box
+          gridColumn="span 12" // Full width for the slider
+          backgroundColor={colors.primary[400]}
+          display="flex"
+          alignItems="center"
+          justifyContent="center"
+        >
+          <Row1Slider /> {/* Render the Slider component */}
+        </Box>
+        {/* ROW 2 */}
+        <Box
+          gridColumn="span 8"
+          gridRow="span 2"
+          backgroundColor={colors.primary[400]}
+        >
+          <Box
+            mt="25px"
+            p="0 30px"
+            display="flex "
+            justifyContent="space-between"
+            alignItems="center"
+          >
+            <Box>
+              <Typography
+                variant="h5"
+                fontWeight="600"
+                color={colors.grey[100]}
+              >
+                Products Need to buy
+              </Typography>
+              <Typography
+                variant="h3"
+                fontWeight="bold"
+                color={colors.greenAccent[500]}
+              >
+                
+              </Typography>
+            </Box>
+            <Box>
+              <IconButton>
+                <AddIcon
+                  sx={{ fontSize: "26px", color: colors.greenAccent[500] }}
+                />
+              </IconButton>
+            </Box>
+          </Box>
+        </Box>
+       
+      </Box>
+    </Box>
+  );
+}
+
+export default Dashboard;
